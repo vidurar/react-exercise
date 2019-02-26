@@ -8,11 +8,14 @@ We want to build a small app that will give us a list of lessons to select and t
 For the purposes of this exercise, the API does not exist so we are faking an async request by just waiting before returning a successful response.
 After "sending the data to the API" - which you can just use a timeout for, the page must disable any further interaction before the 'response' is received. Once the successful response is received, the page can enable again, allowing you do make changes and submit you selection again.
 The format of the selected lessons to send to the API should be as follows:
+
 POST: http://fakeapi.circusstreet.com/ (this does not exist but you can use the address for the sake of argument)
+
 BODY: 
-```{
+`{
   lessonIds:[61,62,63]
-}```
+}`
+
 
 ### Designs:
 Here are the 3 states for the app:
