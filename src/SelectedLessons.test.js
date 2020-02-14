@@ -1,4 +1,4 @@
-import SelectedLessons from './SelectedLessons.component'
+import SelectedLessons from './SelectedLessons'
 import lessonItems from './all-lessons'
 
 const props = {
