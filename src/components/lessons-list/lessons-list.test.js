@@ -90,4 +90,37 @@ describe("Lessons List", () => {
 
     wait(() => expect(rendered.queryByText("Submit")).toBeEnabled());
   });
+
+  it("should disable the submit button if the selected lessons are the same as the previously saved lessons", async () => {
+    cleanup();
+    const storeWithSavedLessons = mockStore({
+      selectedLessons: {
+        isLoading: false,
+        data: ["61", "62"]
+      },
+      allLessons: lessonItems
+    });
+    const renderedWithSavedLessons = render(
+      <Provider store={storeWithSavedLessons}>
+        <LessonsList />
+      </Provider>
+    );
+    expect(renderedWithSavedLessons.queryByText("Submit")).toBeDisabled();
+
+    // toggle off already saved checkbox
+    fireEvent.click(
+      renderedWithSavedLessons.queryByTestId(
+        `checkbox-list-item-input-${lessonItems[0].id}`
+      )
+    );
+    expect(renderedWithSavedLessons.queryByText("Submit")).toBeEnabled();
+
+    // toggle back on already saved checkbox, returning page to initial state
+    fireEvent.click(
+      renderedWithSavedLessons.queryByTestId(
+        `checkbox-list-item-input-${lessonItems[0].id}`
+      )
+    );
+    expect(renderedWithSavedLessons.queryByText("Submit")).toBeDisabled();
+  });
 });
