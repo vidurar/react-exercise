@@ -29,23 +29,23 @@ const SelectedLessonsComponent = ({
   lessons,
   updateSelectedLessons,
   savedSelectedLessonIds,
-  isFetching
+  isLoading
 }) => {
   const [selectedLessonIds, setSelectedLessonIds] = useState([]);
-  console.log("STYLES", styles);
+
   return (
     <div className={styles.container}>
       <div className={styles.title}>Lessons List:</div>
       {lessons.map(({ name, id }) => {
         const isChecked = selectedLessonIds.includes(String(id));
         return (
-          <div>
+          <div key={id}>
             <CheckboxListItem
               id={id}
               name={name}
-              isDisabled={isFetching}
+              isDisabled={isLoading}
               isChecked={isChecked}
-              onChange={({ target: { value } }) => {
+              onClick={({ target: { value } }) => {
                 if (isChecked) {
                   return setSelectedLessonIds(
                     selectedLessonIds.filter(id => id !== value)
@@ -60,8 +60,8 @@ const SelectedLessonsComponent = ({
       <button
         className={styles.button}
         disabled={
-          isFetching ||
-          !selectedLessonIds.length ||
+          isLoading ||
+          (!savedSelectedLessonIds.length && !selectedLessonIds.length) ||
           arraysAreEqual(selectedLessonIds, savedSelectedLessonIds)
         }
         onClick={() => updateSelectedLessons(selectedLessonIds)}
@@ -75,8 +75,8 @@ const SelectedLessonsComponent = ({
 const mapStateToProps = state => {
   return {
     lessons: state.allLessons,
-    isFetching: state.selectedLessons.isFetching,
-    savedSelectedLessonIds: state.selectedLessons.values
+    isLoading: state.selectedLessons.isLoading,
+    savedSelectedLessonIds: state.selectedLessons.data
   };
 };
 

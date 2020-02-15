@@ -6,17 +6,17 @@ import {
 // add code to make reducer work in this file.
 
 const selectedLessons = (
-  state = { isFetching: false, values: [], hasBeenSaved: false },
+  state = { isLoading: false, data: [], hasBeenSaved: false },
   action
 ) => {
   switch (action.type) {
     case UPDATE_SELECTED_LESSONS_REQUEST:
-      return { ...state, isFetching: true };
+      return { ...state, isLoading: true };
     case UPDATE_SELECTED_LESSONS_SUCCESS:
       return {
         ...state,
-        isFetching: false,
-        values: action.data
+        isLoading: false,
+        data: action.data
       };
     default:
       return state;
