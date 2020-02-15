@@ -6,7 +6,7 @@ import { combineReducers } from "redux";
 import lessonItems from "../fixtures/all-lessons";
 
 export const selectedLessons = (
-  state = { isLoading: false, data: [], hasBeenSaved: false },
+  state = { isLoading: false, data: [] },
   action
 ) => {
   switch (action.type) {
