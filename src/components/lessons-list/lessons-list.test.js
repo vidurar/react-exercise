@@ -10,13 +10,13 @@ import {
   getByText
 } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import SelectedLessons from "./SelectedLessons";
-import lessonItems from "./all-lessons";
-import {} from "./updateSelectedLessons.action";
+import LessonsList from "./lessons-list";
+import lessonItems from "../../fixtures/all-lessons";
+import {} from "../../redux/actions";
 
 const mockStore = configureStore([thunk]);
 
-describe("<SelectedLessons /> component", () => {
+describe("Lessons List", () => {
   let store;
   let rendered;
 
@@ -30,7 +30,7 @@ describe("<SelectedLessons /> component", () => {
     });
     rendered = render(
       <Provider store={store}>
-        <SelectedLessons />
+        <LessonsList />
       </Provider>
     );
   });
@@ -65,7 +65,7 @@ describe("<SelectedLessons /> component", () => {
     });
     const renderedWithRequestInFlight = render(
       <Provider store={storeWithRequestInFlight}>
-        <SelectedLessons />
+        <LessonsList />
       </Provider>
     );
 

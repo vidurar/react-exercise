@@ -1,12 +1,11 @@
 import React from "react";
-import styles from "./SelectedLessons.module.css";
+import styles from "./checkbox-list-item.module.css";
 
-const CheckboxListItem = ({ id, name, isChecked, onClick, isDisabled }) => {
+const CheckboxListItem = ({ id, name, isChecked, onChange, isDisabled }) => {
   return (
     <div
       className={styles["checkbox-container"]}
       data-testid="checkbox-list-item"
-      onClick={onClick}
     >
       <input
         data-testid={`checkbox-list-item-input-${id}`}
@@ -17,6 +16,7 @@ const CheckboxListItem = ({ id, name, isChecked, onClick, isDisabled }) => {
         name={name}
         id={id}
         value={id}
+        onChange={onChange}
       />
       <label className={styles["checkbox-label"]}>{name}</label>
     </div>

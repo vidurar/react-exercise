@@ -1,31 +1,11 @@
 import React, { useState } from "react";
-import CheckboxListItem from "./CheckboxListItem";
+import CheckboxListItem from "../checkbox-list-item";
 import { connect } from "react-redux";
-import { updateSelectedLessons } from "./updateSelectedLessons.action";
-import styles from "./SelectedLessons.module.css";
+import { arraysAreEqual } from "../../utils";
+import { updateSelectedLessons } from "../../redux/actions";
+import styles from "./lessons-list.module.css";
 
-// in practice would normally use lodash.isEqual
-// but want to avoid adding libraries in this circumstance
-const arraysAreEqual = (arr1, arr2) => {
-  if (arr1.length !== arr2.length) return false;
-
-  let referenceObj = {};
-
-  for (let entry of arr1) {
-    referenceObj[entry]
-      ? (referenceObj[entry] += 1)
-      : (referenceObj[entry] = 1);
-  }
-
-  for (let entry of arr2) {
-    if (referenceObj[entry]) referenceObj[entry] -= 1;
-    else if (!referenceObj[entry]) return false;
-  }
-
-  return true;
-};
-
-const SelectedLessonsComponent = ({
+const LessonsList = ({
   lessons,
   updateSelectedLessons,
   savedSelectedLessonIds,
@@ -45,7 +25,7 @@ const SelectedLessonsComponent = ({
               name={name}
               isDisabled={isLoading}
               isChecked={isChecked}
-              onClick={({ target: { value } }) => {
+              onChange={({ target: { value } }) => {
                 if (isChecked) {
                   return setSelectedLessonIds(
                     selectedLessonIds.filter(id => id !== value)
@@ -61,7 +41,7 @@ const SelectedLessonsComponent = ({
         className={styles.button}
         disabled={
           isLoading ||
-          (!savedSelectedLessonIds.length && !selectedLessonIds.length) ||
+          !selectedLessonIds.length ||
           arraysAreEqual(selectedLessonIds, savedSelectedLessonIds)
         }
         onClick={() => updateSelectedLessons(selectedLessonIds)}
@@ -87,9 +67,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const SelectedLessons = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SelectedLessonsComponent);
-
-export default SelectedLessons;
+export default connect(mapStateToProps, mapDispatchToProps)(LessonsList);

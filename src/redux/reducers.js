@@ -1,11 +1,11 @@
 import {
   UPDATE_SELECTED_LESSONS_REQUEST,
   UPDATE_SELECTED_LESSONS_SUCCESS
-} from "./updateSelectedLessons.action";
+} from "./constants";
+import { combineReducers } from "redux";
+import lessonItems from "../fixtures/all-lessons";
 
-// add code to make reducer work in this file.
-
-const selectedLessons = (
+export const selectedLessons = (
   state = { isLoading: false, data: [], hasBeenSaved: false },
   action
 ) => {
@@ -23,4 +23,16 @@ const selectedLessons = (
   }
 };
 
-export default selectedLessons;
+const allLessons = (state = lessonItems, action) => {
+  switch (action.type) {
+    default:
+      return state;
+  }
+};
+
+const appReducers = combineReducers({
+  allLessons: allLessons,
+  selectedLessons
+});
+
+export default appReducers;

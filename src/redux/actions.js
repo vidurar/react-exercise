@@ -1,8 +1,7 @@
-export const UPDATE_SELECTED_LESSONS_REQUEST =
-  "UPDATE_SELECTED_LESSONS_REQUEST";
-
-export const UPDATE_SELECTED_LESSONS_SUCCESS =
-  "UPDATE_SELECTED_LESSONS_SUCCESS";
+import {
+  UPDATE_SELECTED_LESSONS_REQUEST,
+  UPDATE_SELECTED_LESSONS_SUCCESS
+} from "./constants";
 
 export const updateSelectedLessonsRequest = data => {
   return {
