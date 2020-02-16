@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styles from "./checkbox-list-item.module.css";
 
 const CheckboxListItem = ({ id, name, isChecked, onChange, isDisabled }) => {
@@ -21,6 +22,15 @@ const CheckboxListItem = ({ id, name, isChecked, onChange, isDisabled }) => {
       <label className={styles["checkbox-label"]}>{name}</label>
     </div>
   );
+};
+
+CheckboxListItem.displayName = "LessonsList";
+CheckboxListItem.propTypes = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  isChecked: PropTypes.bool.isRequired,
+  isDisabled: PropTypes.bool.isRequired,
+  onChange: PropTypes.func.isRequired
 };
 
 export default CheckboxListItem;

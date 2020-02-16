@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import CheckboxListItem from "../checkbox-list-item";
 import { connect } from "react-redux";
 import { arraysAreEqual } from "../../utils";
@@ -50,6 +51,19 @@ const LessonsList = ({
       </button>
     </div>
   );
+};
+
+LessonsList.displayName = "LessonsList";
+LessonsList.propTypes = {
+  lessons: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired
+    })
+  ).isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  savedSelectedLessonIds: PropTypes.arrayOf(PropTypes.string).isRequired,
+  updateSelectedLessons: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => {
